@@ -1,0 +1,911 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Carta Completa · Illadi Sushi</title>
+
+  <!-- Bootstrap 5 CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <!-- Bootstrap Icons -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet" />
+  <!-- Estilos propios de la carta -->
+  <link rel="stylesheet" href="/assets/carta.css" />
+</head>
+<body>
+
+  <!-- =============================================
+       HEADER — Navbar
+       ============================================= -->
+  <header>
+    <nav class="navbar navbar-expand-lg sticky-top" aria-label="Navegación carta">
+      <div class="container">
+        <a class="navbar-brand" href="index.html" aria-label="Volver a inicio">
+          <span>ILLADI</span>SUSHI
+        </a>
+
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navCarta"
+          aria-controls="navCarta"
+          aria-expanded="false"
+          aria-label="Abrir menú"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navCarta">
+          <ul class="navbar-nav ms-auto">
+            <li class="nav-item"><a class="nav-link" href="index.html">← Inicio</a></li>
+            <li class="nav-item"><a class="nav-link" href="index.html#reservas">Reservar</a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+
+  <!-- =============================================
+       MAIN — Carta completa
+       ============================================= -->
+  <main>
+
+    <!-- Cabecera decorativa -->
+    <div class="cabecera-carta">
+      <div class="container">
+        <h1>Carta <span>Completa</span></h1>
+        <p>Todos nuestros platos · Rolls · Entradas · Sashimi · Gohan · Bebidas y más</p>
+      </div>
+    </div>
+
+    <!-- Buscador -->
+    <div class="buscador-wrap">
+      <div class="container">
+        <input
+          type="search"
+          id="buscador"
+          placeholder="🔍  Buscar un plato (ej: salmón, pollo, palta...)"
+          oninput="buscarPlato()"
+          aria-label="Buscar platos en la carta"
+        />
+      </div>
+    </div>
+
+    <!-- Filtros por categoría -->
+    <div class="filtros-wrap">
+      <div class="container">
+        <div class="d-flex flex-wrap gap-2" role="group" aria-label="Filtrar por categoría">
+          <button class="btn-filtro activo" onclick="filtrarCategoria('todas', this)">Todas</button>
+          <button class="btn-filtro" onclick="filtrarCategoria('mas-vendidos', this)">⭐ Más vendidos</button>
+          <button class="btn-filtro" onclick="filtrarCategoria('entradas', this)">Entradas</button>
+          <button class="btn-filtro" onclick="filtrarCategoria('sashimi', this)">Sashimi</button>
+          <button class="btn-filtro" onclick="filtrarCategoria('hosomaki', this)">Hosomaki</button>
+          <button class="btn-filtro" onclick="filtrarCategoria('premium', this)">Premium Rolls</button>
+          <button class="btn-filtro" onclick="filtrarCategoria('gohan', this)">Gohan</button>
+          <button class="btn-filtro" onclick="filtrarCategoria('sushiburger', this)">SushiBurger</button>
+          <button class="btn-filtro" onclick="filtrarCategoria('handrolls', this)">Handrolls</button>
+          <button class="btn-filtro" onclick="filtrarCategoria('promos', this)">Promos</button>
+          <button class="btn-filtro" onclick="filtrarCategoria('bebidas', this)">Bebidas</button>
+          <button class="btn-filtro" onclick="filtrarCategoria('salsas', this)">Salsas</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Contenido de platos -->
+    <div class="container">
+
+      <!-- Mensaje sin resultados -->
+      <div id="sin-resultados" aria-live="polite">
+        <i class="bi bi-search" aria-hidden="true"></i>
+        No encontramos ese plato. Prueba con otra palabra.
+      </div>
+
+      <!-- ===== MÁS VENDIDOS ===== -->
+      <section class="seccion-categoria" data-categoria="mas-vendidos" aria-label="Más vendidos">
+        <h2 class="cat-titulo">⭐ Más Vendidos</h2>
+        <div class="cat-linea"></div>
+        <div class="row g-3">
+
+          <div class="col-sm-6 col-lg-4">
+            <article class="plato-card">
+              <img class="plato-img" src="/assets/imagenes/CevicheRoll.webp" alt="Ceviche Roll" />
+              <div class="plato-body">
+                <h3 class="plato-nombre">Ceviche Roll</h3>
+                <p class="plato-descripcion">Camarón, salmón, queso crema bañado en ceviche mixto con cancha y camote hilo.</p>
+                <div class="plato-card-footer">
+                  <span class="plato-precio">$11.000</span>
+                  <button class="btn-plato" onclick="agregarPlato('Ceviche Roll')">+ Agregar</button>
+                </div>
+              </div>
+            </article>
+          </div>
+
+          <div class="col-sm-6 col-lg-4">
+            <article class="plato-card">
+              <img class="plato-img" src="/assets/imagenes/RollAcevichado.jpg" alt="Roll Acevichado" />
+              <div class="plato-body">
+                <h3 class="plato-nombre">Roll Acevichado</h3>
+                <p class="plato-descripcion">Camarón apanado, queso crema, palta y ciboulette envuelto en salmón. Bañado en salsa acevichada.</p>
+                <div class="plato-card-footer">
+                  <span class="plato-precio">$8.800</span>
+                  <button class="btn-plato" onclick="agregarPlato('Roll Acevichado')">+ Agregar</button>
+                </div>
+              </div>
+            </article>
+          </div>
+
+          <div class="col-sm-6 col-lg-4">
+            <article class="plato-card">
+              <img class="plato-img" src="/assets/imagenes/ToriTeriyakiWhite.webp" alt="Tori Teriyaki White" />
+              <div class="plato-body">
+                <h3 class="plato-nombre">Tori Teriyaki White</h3>
+                <p class="plato-descripcion">Pollo teriyaki, palta, cebollín, envuelto en queso crema con almendras laminadas tostadas.</p>
+                <div class="plato-card-footer">
+                  <span class="plato-precio">$8.800</span>
+                  <button class="btn-plato" onclick="agregarPlato('Tori Teriyaki White')">+ Agregar</button>
+                </div>
+              </div>
+            </article>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- ===== ENTRADAS ===== -->
+      <section class="seccion-categoria" data-categoria="entradas" aria-label="Entradas">
+        <h2 class="cat-titulo">Entradas</h2>
+        <div class="cat-linea"></div>
+        <div class="row g-3">
+
+          <div class="col-sm-6 col-lg-4">
+            <article class="plato-card">
+              <img class="plato-img" src="/assets/imagenes/BolitasDeQueso.avif" alt="Bolitas de Queso" />
+              <div class="plato-body">
+                <h3 class="plato-nombre">Bolitas de Queso</h3>
+                <p class="plato-descripcion">10 unidades de bolitas de queso apanadas en panko.</p>
+                <div class="plato-card-footer">
+                  <span class="plato-precio">$4.500</span>
+                  <button class="btn-plato" onclick="agregarPlato('Bolitas de Queso')">+ Agregar</button>
+                </div>
+              </div>
+            </article>
+          </div>
+
+          <div class="col-sm-6 col-lg-4">
+            <article class="plato-card">
+              <img class="plato-img" src="/assets/imagenes/BrochetasEbi.jpg" alt="Brochetas Ebi" />
+              <div class="plato-body">
+                <h3 class="plato-nombre">Brochetas Ebi</h3>
+                <p class="plato-descripcion">5 Brochetas de camarón apanado.</p>
+                <div class="plato-card-footer">
+                  <span class="plato-precio">$5.200</span>
+                  <button class="btn-plato" onclick="agregarPlato('Brochetas Ebi')">+ Agregar</button>
+                </div>
+              </div>
+            </article>
+          </div>
+
+          <div class="col-sm-6 col-lg-4">
+            <article class="plato-card">
+              <img class="plato-img" src="/assets/imagenes/BrochetasTori.jpeg" alt="Brochetas Tori" />
+              <div class="plato-body">
+                <h3 class="plato-nombre">Brochetas Tori</h3>
+                <p class="plato-descripcion">5 deliciosas brochetas de pollo apanado en panko, con salsa BBQ.</p>
+                <div class="plato-card-footer">
+                  <span class="plato-precio">$5.200</span>
+                  <button class="btn-plato" onclick="agregarPlato('Brochetas Tori')">+ Agregar</button>
+                </div>
+              </div>
+            </article>
+          </div>
+
+          <div class="col-sm-6 col-lg-4">
+            <article class="plato-card">
+              <img class="plato-img" src="/assets/imagenes/CevicheMixto.jpg" alt="Ceviche Mixto" />
+              <div class="plato-body">
+                <h3 class="plato-nombre">Ceviche Mixto</h3>
+                <p class="plato-descripcion">Salmón, camarón, kanikama, pimentón, cebolla morada, leche de tigre, cancha, choclo peruano, camote frito, flor de palta.</p>
+                <div class="plato-card-footer">
+                  <span class="plato-precio">$8.900</span>
+                  <button class="btn-plato" onclick="agregarPlato('Ceviche Mixto')">+ Agregar</button>
+                </div>
+              </div>
+            </article>
+          </div>
+
+          <div class="col-sm-6 col-lg-4">
+            <article class="plato-card">
+              <img class="plato-img" src="/assets/imagenes/Gyozas.avif" alt="Gyozas" />
+              <div class="plato-body">
+                <h3 class="plato-nombre">Gyozas</h3>
+                <p class="plato-descripcion">5 unidades al vapor o fritas. Pollo, cerdo, camarón o verduras a elección.</p>
+                <div class="plato-card-footer">
+                  <span class="plato-precio">$5.500</span>
+                  <button class="btn-plato" onclick="agregarPlato('Gyozas')">+ Agregar</button>
+                </div>
+              </div>
+            </article>
+          </div>
+
+          <div class="col-sm-6 col-lg-4">
+            <article class="plato-card">
+              <img class="plato-img" src="/assets/imagenes/NigiriSake.webp" alt="Nigiri Sake" />
+              <div class="plato-body">
+                <h3 class="plato-nombre">Nigiri Sake</h3>
+                <p class="plato-descripcion">2 unidades de nigiri de salmón sobre arroz prensado a mano.</p>
+                <div class="plato-card-footer">
+                  <span class="plato-precio">$3.800</span>
+                  <button class="btn-plato" onclick="agregarPlato('Nigiri Sake')">+ Agregar</button>
+                </div>
+              </div>
+            </article>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- ===== SASHIMI ===== -->
+      <section class="seccion-categoria" data-categoria="sashimi" aria-label="Sashimi">
+        <h2 class="cat-titulo">Sashimi</h2>
+        <div class="cat-linea"></div>
+        <div class="row g-3">
+
+          <div class="col-sm-6 col-lg-4">
+            <article class="plato-card">
+              <img class="plato-img" src="/assets/imagenes/SashimiDeSalmon.jpg" alt="Sashimi de Salmón" />
+              <div class="plato-body">
+                <h3 class="plato-nombre">Sashimi de Salmón</h3>
+                <p class="plato-descripcion">5 cortes de salmón fresco.</p>
+                <div class="plato-card-footer">
+                  <span class="plato-precio">$6.500</span>
+                  <button class="btn-plato" onclick="agregarPlato('Sashimi de Salmón')">+ Agregar</button>
+                </div>
+              </div>
+            </article>
+          </div>
+
+          <div class="col-sm-6 col-lg-4">
+            <article class="plato-card">
+              <img class="plato-img" src="/assets/imagenes/SashimiTuna.webp" alt="Sashimi Tuna" />
+              <div class="plato-body">
+                <h3 class="plato-nombre">Sashimi Tuna</h3>
+                <p class="plato-descripcion">5 cortes de atún fresco.</p>
+                <div class="plato-card-footer">
+                  <span class="plato-precio">$7.200</span>
+                  <button class="btn-plato" onclick="agregarPlato('Sashimi Tuna')">+ Agregar</button>
+                </div>
+              </div>
+            </article>
+          </div>
+
+          <div class="col-sm-6 col-lg-4">
+            <article class="plato-card">
+              <img class="plato-img" src="/assets/imagenes/SashimiDePulpo.png" alt="Sashimi de Pulpo" />
+              <div class="plato-body">
+                <h3 class="plato-nombre">Sashimi de Pulpo</h3>
+                <p class="plato-descripcion">5 cortes de pulpo acompañados de salsa al olivo.</p>
+                <div class="plato-card-footer">
+                  <span class="plato-precio">$7.500</span>
+                  <button class="btn-plato" onclick="agregarPlato('Sashimi de Pulpo')">+ Agregar</button>
+                </div>
+              </div>
+            </article>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- ===== HOSOMAKI ===== -->
+      <section class="seccion-categoria" data-categoria="hosomaki" aria-label="Hosomaki Rolls">
+        <h2 class="cat-titulo">Hosomaki Rolls</h2>
+        <div class="cat-linea"></div>
+        <div class="row g-3">
+
+          <div class="col-sm-6 col-lg-4">
+            <article class="plato-card">
+              <img class="plato-img" src="/assets/imagenes/HosomakiSake.webp" alt="Hosomaki Sake" />
+              <div class="plato-body">
+                <h3 class="plato-nombre">Hosomaki Sake</h3>
+                <p class="plato-descripcion">Hosomaki de salmón · 8 bocados.</p>
+                <div class="plato-card-footer">
+                  <span class="plato-precio">$4.200</span>
+                  <button class="btn-plato" onclick="agregarPlato('Hosomaki Sake')">+ Agregar</button>
+                </div>
+              </div>
+            </article>
+          </div>
+
+          <div class="col-sm-6 col-lg-4">
+            <article class="plato-card">
+              <img class="plato-img" src="/assets/imagenes/HosomakiAvocado.webp" alt="Hosomaki Avocado" />
+              <div class="plato-body">
+                <h3 class="plato-nombre">Hosomaki Avocado</h3>
+                <p class="plato-descripcion">Hosomaki de palta · 8 bocados.</p>
+                <div class="plato-card-footer">
+                  <span class="plato-precio">$3.800</span>
+                  <button class="btn-plato" onclick="agregarPlato('Hosomaki Avocado')">+ Agregar</button>
+                </div>
+              </div>
+            </article>
+          </div>
+
+          <div class="col-sm-6 col-lg-4">
+            <article class="plato-card">
+              <img class="plato-img" src="/assets/imagenes/HosomakiEbi.webp" alt="Hosomaki Ebi" />
+              <div class="plato-body">
+                <h3 class="plato-nombre">Hosomaki Ebi</h3>
+                <p class="plato-descripcion">Hosomaki de camarón · 8 bocados.</p>
+                <div class="plato-card-footer">
+                  <span class="plato-precio">$4.200</span>
+                  <button class="btn-plato" onclick="agregarPlato('Hosomaki Ebi')">+ Agregar</button>
+                </div>
+              </div>
+            </article>
+          </div>
+
+          <div class="col-sm-6 col-lg-4">
+            <article class="plato-card">
+              <img class="plato-img" src="/assets/imagenes/HosomakiCheese.webp" alt="Hosomaki Cheese" />
+              <div class="plato-body">
+                <h3 class="plato-nombre">Hosomaki Cheese</h3>
+                <p class="plato-descripcion">Hosomaki de queso crema · 8 bocados.</p>
+                <div class="plato-card-footer">
+                  <span class="plato-precio">$3.500</span>
+                  <button class="btn-plato" onclick="agregarPlato('Hosomaki Cheese')">+ Agregar</button>
+                </div>
+              </div>
+            </article>
+          </div>
+
+          <div class="col-sm-6 col-lg-4">
+            <article class="plato-card">
+              <img class="plato-img" src="/assets/imagenes/HosomakiSakeCheese.webp" alt="Hosomaki Sake Cheese" />
+              <div class="plato-body">
+                <h3 class="plato-nombre">Hosomaki Sake Cheese</h3>
+                <p class="plato-descripcion">Hosomaki de salmón y queso crema · 8 bocados.</p>
+                <div class="plato-card-footer">
+                  <span class="plato-precio">$4.500</span>
+                  <button class="btn-plato" onclick="agregarPlato('Hosomaki Sake Cheese')">+ Agregar</button>
+                </div>
+              </div>
+            </article>
+          </div>
+
+          <div class="col-sm-6 col-lg-4">
+            <article class="plato-card">
+              <img class="plato-img" src="/assets/imagenes/HosomakiTunaCheese.jpg" alt="Hosomaki Tuna Cheese" />
+              <div class="plato-body">
+                <h3 class="plato-nombre">Hosomaki Tuna Cheese</h3>
+                <p class="plato-descripcion">Hosomaki de atún y queso crema · 8 bocados.</p>
+                <div class="plato-card-footer">
+                  <span class="plato-precio">$4.800</span>
+                  <button class="btn-plato" onclick="agregarPlato('Hosomaki Tuna Cheese')">+ Agregar</button>
+                </div>
+              </div>
+            </article>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- ===== PREMIUM ROLLS ===== -->
+      <section class="seccion-categoria" data-categoria="premium" aria-label="Premium Rolls">
+        <h2 class="cat-titulo">Premium Rolls</h2>
+        <div class="cat-linea"></div>
+        <div class="row g-3">
+
+          <div class="col-sm-6 col-lg-4">
+            <article class="plato-card">
+              <img class="plato-img" src="/assets/imagenes/CevicheRoll.webp" alt="Ceviche Roll" />
+              <div class="plato-body">
+                <h3 class="plato-nombre">Ceviche Roll</h3>
+                <p class="plato-descripcion">Camarón, salmón, queso crema bañado en ceviche mixto con cancha y camote hilo.</p>
+                <div class="plato-card-footer">
+                  <span class="plato-precio">$11.000</span>
+                  <button class="btn-plato" onclick="agregarPlato('Ceviche Roll')">+ Agregar</button>
+                </div>
+              </div>
+            </article>
+          </div>
+
+          <div class="col-sm-6 col-lg-4">
+            <article class="plato-card">
+              <img class="plato-img" src="/assets/imagenes/RollAcevichado.jpg" alt="Roll Acevichado" />
+              <div class="plato-body">
+                <h3 class="plato-nombre">Roll Acevichado</h3>
+                <p class="plato-descripcion">Camarón apanado, queso crema, palta y ciboulette envuelto en salmón + salsa acevichada.</p>
+                <div class="plato-card-footer">
+                  <span class="plato-precio">$8.800</span>
+                  <button class="btn-plato" onclick="agregarPlato('Roll Acevichado')">+ Agregar</button>
+                </div>
+              </div>
+            </article>
+          </div>
+
+          <div class="col-sm-6 col-lg-4">
+            <article class="plato-card">
+              <img class="plato-img" src="/assets/imagenes/ToriTeriyakiWhite.webp" alt="Tori Teriyaki White" />
+              <div class="plato-body">
+                <h3 class="plato-nombre">Tori Teriyaki White</h3>
+                <p class="plato-descripcion">Pollo teriyaki, palta, cebollín, envuelto en queso crema con almendras laminadas tostadas.</p>
+                <div class="plato-card-footer">
+                  <span class="plato-precio">$8.800</span>
+                  <button class="btn-plato" onclick="agregarPlato('Tori Teriyaki White')">+ Agregar</button>
+                </div>
+              </div>
+            </article>
+          </div>
+
+          <div class="col-sm-6 col-lg-4">
+            <article class="plato-card">
+              <img class="plato-img" src="/assets/imagenes/SalmonFuraiSpicy.webp" alt="Salmon Furai Spicy" />
+              <div class="plato-body">
+                <h3 class="plato-nombre">Salmon Furai Spicy</h3>
+                <p class="plato-descripcion">Salmón furai, queso crema, ciboulette, envuelto en palta + salsa spicy (picante medio).</p>
+                <div class="plato-card-footer">
+                  <span class="plato-precio">$8.800</span>
+                  <button class="btn-plato" onclick="agregarPlato('Salmon Furai Spicy')">+ Agregar</button>
+                </div>
+              </div>
+            </article>
+          </div>
+
+          <div class="col-sm-6 col-lg-4">
+            <article class="plato-card">
+              <img class="plato-img" src="/assets/imagenes/ToriTariRoll.webp" alt="Tori Tari Roll" />
+              <div class="plato-body">
+                <h3 class="plato-nombre">Tori Tari Roll</h3>
+                <p class="plato-descripcion">Pollo salteado, palta, queso crema, envuelto en panko (frito) + salsa tari (picante bajo).</p>
+                <div class="plato-card-footer">
+                  <span class="plato-precio">$8.800</span>
+                  <button class="btn-plato" onclick="agregarPlato('Tori Tari Roll')">+ Agregar</button>
+                </div>
+              </div>
+            </article>
+          </div>
+
+          <div class="col-sm-6 col-lg-4">
+            <article class="plato-card">
+              <img class="plato-img" src="/assets/imagenes/GuacamoleRoll.webp" alt="Guacamole Roll" />
+              <div class="plato-body">
+                <h3 class="plato-nombre">Guacamole Roll</h3>
+                <p class="plato-descripcion">Pollo, queso crema y ciboulette envuelto en panko + delicioso guacamole mexicano.</p>
+                <div class="plato-card-footer">
+                  <span class="plato-precio">$10.500</span>
+                  <button class="btn-plato" onclick="agregarPlato('Guacamole Roll')">+ Agregar</button>
+                </div>
+              </div>
+            </article>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- ===== GOHAN ===== -->
+      <section class="seccion-categoria" data-categoria="gohan" aria-label="Gohan">
+        <h2 class="cat-titulo">Gohan</h2>
+        <div class="cat-linea"></div>
+        <div class="row g-3">
+
+          <div class="col-sm-6 col-lg-4">
+            <article class="plato-card">
+              <img class="plato-img" src="/assets/imagenes/GohanAcevichado.webp" alt="Gohan Acevichado" />
+              <div class="plato-body">
+                <h3 class="plato-nombre">Gohan Acevichado</h3>
+                <p class="plato-descripcion">Camarón, kanikama, cebollín, palta, queso + ceviche mixto.</p>
+                <div class="plato-card-footer">
+                  <span class="plato-precio">$11.790</span>
+                  <button class="btn-plato" onclick="agregarPlato('Gohan Acevichado')">+ Agregar</button>
+                </div>
+              </div>
+            </article>
+          </div>
+
+          <div class="col-sm-6 col-lg-4">
+            <article class="plato-card">
+              <img class="plato-img" src="/assets/imagenes/GohanIlladi.webp" alt="Gohan Illadi" />
+              <div class="plato-body">
+                <h3 class="plato-nombre">Gohan Illadi</h3>
+                <p class="plato-descripcion">Camarón, salmón, queso crema, palta, cebollín, aceite de sésamo y sésamo.</p>
+                <div class="plato-card-footer">
+                  <span class="plato-precio">$10.700</span>
+                  <button class="btn-plato" onclick="agregarPlato('Gohan Illadi')">+ Agregar</button>
+                </div>
+              </div>
+            </article>
+          </div>
+
+          <div class="col-sm-6 col-lg-4">
+            <article class="plato-card">
+              <img class="plato-img" src="/assets/imagenes/GohanTory.webp" alt="Gohan Tory" />
+              <div class="plato-body">
+                <h3 class="plato-nombre">Gohan Tory</h3>
+                <p class="plato-descripcion">Pollo apanado, champiñón, queso, cebollín y palta.</p>
+                <div class="plato-card-footer">
+                  <span class="plato-precio">$9.390</span>
+                  <button class="btn-plato" onclick="agregarPlato('Gohan Tory')">+ Agregar</button>
+                </div>
+              </div>
+            </article>
+          </div>
+
+          <div class="col-sm-6 col-lg-4">
+            <article class="plato-card">
+              <img class="plato-img" src="/assets/imagenes/GohanEbiFurai.webp" alt="Gohan Ebi Furai" />
+              <div class="plato-body">
+                <h3 class="plato-nombre">Gohan Ebi Furai</h3>
+                <p class="plato-descripcion">Camarón apanado, queso crema, cebollín, palta, sésamo y aceite de sésamo.</p>
+                <div class="plato-card-footer">
+                  <span class="plato-precio">$10.200</span>
+                  <button class="btn-plato" onclick="agregarPlato('Gohan Ebi Furai')">+ Agregar</button>
+                </div>
+              </div>
+            </article>
+          </div>
+
+          <div class="col-sm-6 col-lg-4">
+            <article class="plato-card">
+              <img class="plato-img" src="/assets/imagenes/GohanSaltado.webp" alt="Gohan Saltado" />
+              <div class="plato-body">
+                <h3 class="plato-nombre">Gohan Saltado</h3>
+                <p class="plato-descripcion">Carne salteada, cebolla, tomate, queso crema y papas al hilo.</p>
+                <div class="plato-card-footer">
+                  <span class="plato-precio">$10.500</span>
+                  <button class="btn-plato" onclick="agregarPlato('Gohan Saltado')">+ Agregar</button>
+                </div>
+              </div>
+            </article>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- ===== SUSHI BURGERS ===== -->
+      <section class="seccion-categoria" data-categoria="sushiburger" aria-label="SushiBurgers">
+        <h2 class="cat-titulo">SushiBurgers</h2>
+        <div class="cat-linea"></div>
+        <div class="row g-3">
+
+          <div class="col-sm-6 col-lg-4">
+            <article class="plato-card">
+              <img class="plato-img" src="/assets/imagenes/SushiBurgerSake.webp" alt="Sushi Burger Sake" />
+              <div class="plato-body">
+                <h3 class="plato-nombre">Sushi Burger Sake</h3>
+                <p class="plato-descripcion">Salmón, palta, queso crema, cebollín.</p>
+                <div class="plato-card-footer">
+                  <span class="plato-precio">$7.800</span>
+                  <button class="btn-plato" onclick="agregarPlato('Sushi Burger Sake')">+ Agregar</button>
+                </div>
+              </div>
+            </article>
+          </div>
+
+          <div class="col-sm-6 col-lg-4">
+            <article class="plato-card">
+              <img class="plato-img" src="/assets/imagenes/SushiBurgerEbi.jpeg" alt="Sushi Burger Ebi" />
+              <div class="plato-body">
+                <h3 class="plato-nombre">Sushi Burger Ebi</h3>
+                <p class="plato-descripcion">Camarón, queso crema, palta, cebollín.</p>
+                <div class="plato-card-footer">
+                  <span class="plato-precio">$7.800</span>
+                  <button class="btn-plato" onclick="agregarPlato('Sushi Burger Ebi')">+ Agregar</button>
+                </div>
+              </div>
+            </article>
+          </div>
+
+          <div class="col-sm-6 col-lg-4">
+            <article class="plato-card">
+              <img class="plato-img" src="/assets/imagenes/SushiBurgerChicken.webp" alt="Sushi Burger Chicken" />
+              <div class="plato-body">
+                <h3 class="plato-nombre">Sushi Burger Chicken</h3>
+                <p class="plato-descripcion">Pollo apanado, queso crema, cebollín y palta.</p>
+                <div class="plato-card-footer">
+                  <span class="plato-precio">$7.500</span>
+                  <button class="btn-plato" onclick="agregarPlato('Sushi Burger Chicken')">+ Agregar</button>
+                </div>
+              </div>
+            </article>
+          </div>
+
+          <div class="col-sm-6 col-lg-4">
+            <article class="plato-card">
+              <img class="plato-img" src="/assets/imagenes/SushiBurgerBeef.png" alt="Sushi Burger Beef" />
+              <div class="plato-body">
+                <h3 class="plato-nombre">Sushi Burger Beef</h3>
+                <p class="plato-descripcion">Carne, queso crema, palta y cebollín.</p>
+                <div class="plato-card-footer">
+                  <span class="plato-precio">$8.200</span>
+                  <button class="btn-plato" onclick="agregarPlato('Sushi Burger Beef')">+ Agregar</button>
+                </div>
+              </div>
+            </article>
+          </div>
+
+          <div class="col-sm-6 col-lg-4">
+            <article class="plato-card">
+              <img class="plato-img" src="/assets/imagenes/SushiBurgerVegetal.webp" alt="Sushi Burger Vegetal" />
+              <div class="plato-body">
+                <h3 class="plato-nombre">Sushi Burger Vegetal</h3>
+                <p class="plato-descripcion">Champiñón, queso crema, palta, cebollín.</p>
+                <div class="plato-card-footer">
+                  <span class="plato-precio">$7.200</span>
+                  <button class="btn-plato" onclick="agregarPlato('Sushi Burger Vegetal')">+ Agregar</button>
+                </div>
+              </div>
+            </article>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- ===== HANDROLLS ===== -->
+      <section class="seccion-categoria" data-categoria="handrolls" aria-label="Handrolls">
+        <h2 class="cat-titulo">Handrolls</h2>
+        <div class="cat-linea"></div>
+        <div class="row g-3">
+
+          <div class="col-sm-6 col-lg-4">
+            <article class="plato-card">
+              <img class="plato-img" src="/assets/imagenes/HandrollQuesoPalta.webp" alt="Handroll Queso Palta" />
+              <div class="plato-body">
+                <h3 class="plato-nombre">Handroll Queso Palta</h3>
+                <p class="plato-descripcion">Queso crema, palta (proteína a elección).</p>
+                <div class="plato-card-footer">
+                  <span class="plato-precio">$4.500</span>
+                  <button class="btn-plato" onclick="agregarPlato('Handroll Queso Palta')">+ Agregar</button>
+                </div>
+              </div>
+            </article>
+          </div>
+
+          <div class="col-sm-6 col-lg-4">
+            <article class="plato-card">
+              <img class="plato-img" src="/assets/imagenes/HandrollChocloPalta.webp" alt="Handroll Choclo Palta" />
+              <div class="plato-body">
+                <h3 class="plato-nombre">Handroll Choclo Palta</h3>
+                <p class="plato-descripcion">Queso crema, choclo, palta (proteína a elección).</p>
+                <div class="plato-card-footer">
+                  <span class="plato-precio">$4.800</span>
+                  <button class="btn-plato" onclick="agregarPlato('Handroll Choclo Palta')">+ Agregar</button>
+                </div>
+              </div>
+            </article>
+          </div>
+
+          <div class="col-sm-6 col-lg-4">
+            <article class="plato-card">
+              <img class="plato-img" src="/assets/imagenes/HandrollXLPollo.webp" alt="Handroll XL Pollo" />
+              <div class="plato-body">
+                <h3 class="plato-nombre">Handroll XL Pollo 🔥</h3>
+                <p class="plato-descripcion">Pollo apanado, queso crema, palta, cebollín. Nuestro handroll XL viral.</p>
+                <div class="plato-card-footer">
+                  <span class="plato-precio">$6.500</span>
+                  <button class="btn-plato" onclick="agregarPlato('Handroll XL Pollo')">+ Agregar</button>
+                </div>
+              </div>
+            </article>
+          </div>
+
+          <div class="col-sm-6 col-lg-4">
+            <article class="plato-card">
+              <img class="plato-img" src="/assets/imagenes/HandrollXLChampiñon.webp" alt="Handroll XL Champiñón" />
+              <div class="plato-body">
+                <h3 class="plato-nombre">Handroll XL Champiñón 🔥</h3>
+                <p class="plato-descripcion">Champiñón apanado, queso crema, palta, cebollín. Nuestro handroll XL viral.</p>
+                <div class="plato-card-footer">
+                  <span class="plato-precio">$6.500</span>
+                  <button class="btn-plato" onclick="agregarPlato('Handroll XL Champiñón')">+ Agregar</button>
+                </div>
+              </div>
+            </article>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- ===== PROMOS ===== -->
+      <section class="seccion-categoria" data-categoria="promos" aria-label="Promociones">
+        <h2 class="cat-titulo">Promos y Combos</h2>
+        <div class="cat-linea"></div>
+        <div class="row g-3">
+
+          <div class="col-sm-6 col-lg-4">
+            <article class="plato-card">
+              <img class="plato-img" src="/assets/imagenes/Promo1.webp" alt="Promoción 1" />
+              <div class="plato-body">
+                <h3 class="plato-nombre">Promoción 1</h3>
+                <p class="plato-descripcion">10 rolls vegetariano (palta y queso crema) + 8 hosomaki salmón.</p>
+                <div class="plato-card-footer">
+                  <span class="plato-precio">$8.750</span>
+                  <button class="btn-plato" onclick="agregarPlato('Promoción 1')">+ Agregar</button>
+                </div>
+              </div>
+            </article>
+          </div>
+
+          <div class="col-sm-6 col-lg-4">
+            <article class="plato-card">
+              <img class="plato-img" src="/assets/imagenes/Promo2.jpeg" alt="Promoción 2" />
+              <div class="plato-body">
+                <h3 class="plato-nombre">Promoción 2</h3>
+                <p class="plato-descripcion">10 rolls camarón + 10 rolls salmón + 8 hosomaki camarón.</p>
+                <div class="plato-card-footer">
+                  <span class="plato-precio">$17.250</span>
+                  <button class="btn-plato" onclick="agregarPlato('Promoción 2')">+ Agregar</button>
+                </div>
+              </div>
+            </article>
+          </div>
+
+          <div class="col-sm-6 col-lg-4">
+            <article class="plato-card">
+              <img class="plato-img" src="/assets/imagenes/Promo3.webp" alt="Miércoles Mixtos 30 piezas" />
+              <div class="plato-body">
+                <h3 class="plato-nombre">Miércoles Mixtos</h3>
+                <p class="plato-descripcion">10 salmón + 10 camarón + 10 pollo panko. 30 piezas.</p>
+                <div class="plato-card-footer">
+                  <span class="plato-precio">$20.000</span>
+                  <button class="btn-plato" onclick="agregarPlato('Miércoles Mixtos')">+ Agregar</button>
+                </div>
+              </div>
+            </article>
+          </div>
+
+          <div class="col-sm-6 col-lg-4">
+            <article class="plato-card">
+              <img class="plato-img" src="/assets/imagenes/LunesOrange.webp" alt="Lunes Orange" />
+              <div class="plato-body">
+                <h3 class="plato-nombre">Lunes Orange</h3>
+                <p class="plato-descripcion">10 salmón + 10 camarón + 10 jaiba. Todos envueltos en salmón. 30 piezas.</p>
+                <div class="plato-card-footer">
+                  <span class="plato-precio">$22.000</span>
+                  <button class="btn-plato" onclick="agregarPlato('Lunes Orange')">+ Agregar</button>
+                </div>
+              </div>
+            </article>
+          </div>
+
+          <div class="col-sm-6 col-lg-4">
+            <article class="plato-card">
+              <img class="plato-img" src="/assets/imagenes/MartesChicken.webp" alt="Martes Chicken" />
+              <div class="plato-body">
+                <h3 class="plato-nombre">Martes Chicken</h3>
+                <p class="plato-descripcion">10 pollo apanado palta + 10 pollo apanado sésamo + 10 pollo teriyaki panko. 30 piezas.</p>
+                <div class="plato-card-footer">
+                  <span class="plato-precio">$17.500</span>
+                  <button class="btn-plato" onclick="agregarPlato('Martes Chicken')">+ Agregar</button>
+                </div>
+              </div>
+            </article>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- ===== BEBIDAS ===== -->
+      <section class="seccion-categoria" data-categoria="bebidas" aria-label="Bebidas">
+        <h2 class="cat-titulo">Bebidas</h2>
+        <div class="cat-linea"></div>
+        <div class="row g-3">
+
+          <div class="col-sm-6 col-lg-4">
+            <article class="plato-card">
+              <img class="plato-img" src="assets/imagenes/AguaMineral.jpg" alt="Agua Mineral" />
+              <div class="plato-body">
+                <h3 class="plato-nombre">Agua Mineral</h3>
+                <p class="plato-descripcion">Con gas o sin gas.</p>
+                <div class="plato-card-footer">
+                  <span class="plato-precio">$1.200</span>
+                  <button class="btn-plato" onclick="agregarPlato('Agua Mineral')">+ Agregar</button>
+                </div>
+              </div>
+            </article>
+          </div>
+
+          <div class="col-sm-6 col-lg-4">
+            <article class="plato-card">
+              <img class="plato-img" src="/assets/imagenes/BebidaEnLata.webp" alt="Bebida en Lata" />
+              <div class="plato-body">
+                <h3 class="plato-nombre">Bebida en Lata</h3>
+                <p class="plato-descripcion">Variedades disponibles.</p>
+                <div class="plato-card-footer">
+                  <span class="plato-precio">$1.500</span>
+                  <button class="btn-plato" onclick="agregarPlato('Bebida en Lata')">+ Agregar</button>
+                </div>
+              </div>
+            </article>
+          </div>
+
+          <div class="col-sm-6 col-lg-4">
+            <article class="plato-card">
+              <img class="plato-img" src="/assets/imagenes/JugoAndina.webp" alt="Jugo Andina" />
+              <div class="plato-body">
+                <h3 class="plato-nombre">Jugo Andina</h3>
+                <p class="plato-descripcion">Variedades · 400ml.</p>
+                <div class="plato-card-footer">
+                  <span class="plato-precio">$1.800</span>
+                  <button class="btn-plato" onclick="agregarPlato('Jugo Andina')">+ Agregar</button>
+                </div>
+              </div>
+            </article>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- ===== SALSAS ===== -->
+      <section class="seccion-categoria" data-categoria="salsas" aria-label="Salsas extras">
+        <h2 class="cat-titulo">Salsas Extras</h2>
+        <div class="cat-linea"></div>
+        <div class="row g-3">
+
+          <div class="col-sm-6 col-lg-4">
+            <article class="plato-card">
+              <img class="plato-img" src="/assets/imagenes/SalsaSoyaSachet.png" alt="Salsa de Soya Sachet" />
+              <div class="plato-body">
+                <h3 class="plato-nombre">Salsa de Soya Sachet</h3>
+                <p class="plato-descripcion">Sachet de salsa de soya premium de 30ml.</p>
+                <div class="plato-card-footer">
+                  <span class="plato-precio">$500</span>
+                  <button class="btn-plato" onclick="agregarPlato('Salsa de Soya Sachet')">+ Agregar</button>
+                </div>
+              </div>
+            </article>
+          </div>
+
+          <div class="col-sm-6 col-lg-4">
+            <article class="plato-card">
+              <img class="plato-img" src="/assets/imagenes/SalsaAlOlivo.jpg" alt="Salsa al Olivo" />
+              <div class="plato-body">
+                <h3 class="plato-nombre">Salsa al Olivo</h3>
+                <p class="plato-descripcion">Salsa de aceituna morada 45ml.</p>
+                <div class="plato-card-footer">
+                  <span class="plato-precio">$800</span>
+                  <button class="btn-plato" onclick="agregarPlato('Salsa al Olivo')">+ Agregar</button>
+                </div>
+              </div>
+            </article>
+          </div>
+
+          <div class="col-sm-6 col-lg-4">
+            <article class="plato-card">
+              <img class="plato-img" src="/assets/imagenes/SalsaTeriyaki.jpg" alt="Salsa Teriyaki" />
+              <div class="plato-body">
+                <h3 class="plato-nombre">Salsa Teriyaki</h3>
+                <p class="plato-descripcion">Salsa agridulce de la casa 45ml.</p>
+                <div class="plato-card-footer">
+                  <span class="plato-precio">$800</span>
+                  <button class="btn-plato" onclick="agregarPlato('Salsa Teriyaki')">+ Agregar</button>
+                </div>
+              </div>
+            </article>
+          </div>
+
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+
+  <!-- =============================================
+       FOOTER
+       ============================================= -->
+  <footer>
+    <div class="container">
+      <a href="index.html" class="btn-volver">← Volver al inicio</a>
+      <p>© 2026 Illadi Sushi · Todos los derechos reservados.</p>
+    </div>
+  </footer>
+
+
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <!-- JS propio de la carta -->
+  <script src="/assets/carta.js"></script>
+
+</body>
+</html>

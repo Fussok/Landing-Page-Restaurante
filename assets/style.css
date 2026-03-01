@@ -1,33 +1,549 @@
-.logo {
-    margin-left: 700px;
-}
-h1 {
-    display: flex;
-    justify-content: center;
-}
-button {
-    width: 300px;
-    height: 50px;
+/* ============================================
+   STYLE.CSS — Estilos para index.html
+   Illadi Sushi · Landing Page
+   ============================================ */
+
+/* ---------- VARIABLES DE COLOR ---------- */
+:root {
+  --negro:       #0d0d0d;
+  --negro-soft:  #1a1a1a;
+  --morado:      #7b2d8b;
+  --morado-dark: #5a1f68;
+  --morado-glow: rgba(123, 45, 139, 0.3);
+  --blanco:      #f5f5f5;
+  --gris-texto:  #aaaaaa;
+  --gris-card:   #181818;
 }
 
+/* ---------- RESET Y BASE ---------- */
 * {
-    background-color: black;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-button {
-    color: white;
-    background-color: blueviolet;
-}
-p {
-    color: white;
+html {
+  scroll-behavior: smooth;
 }
 
-section {
-    color: white;
+body {
+  background-color: var(--negro);
+  color: var(--blanco);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
-.derechos {
-    text-align: center;
-}
+
+/* ---------- NAVBAR ---------- */
 .navbar {
-    margin-top: 10px;
+  background-color: rgba(13, 13, 13, 0.95) !important;
+  border-bottom: 2px solid var(--morado);
+  padding: 8px 0;
+  transition: padding 0.3s;
+}
+
+.navbar-brand img {
+  height: 52px;
+  transition: transform 0.2s;
+}
+
+.navbar-brand img:hover {
+  transform: scale(1.05);
+}
+
+.nav-link {
+  color: var(--blanco) !important;
+  font-size: 0.9rem;
+  letter-spacing: 0.05em;
+  padding: 6px 14px !important;
+  transition: color 0.2s;
+}
+
+.nav-link:hover {
+  color: var(--morado) !important;
+}
+
+/* Botón de reserva en navbar */
+.btn-nav-reserva {
+  background-color: var(--morado);
+  color: var(--blanco) !important;
+  border-radius: 4px;
+  font-weight: 700;
+  transition: background-color 0.2s, transform 0.15s;
+}
+
+.btn-nav-reserva:hover {
+  background-color: var(--morado-dark);
+  transform: translateY(-1px);
+}
+
+/* Ícono hamburguesa en morado */
+.navbar-toggler {
+  border-color: var(--morado);
+}
+
+.navbar-toggler-icon {
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba(123,45,139,1)' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+}
+
+/* ---------- HERO ---------- */
+#hero {
+  min-height: 100vh;
+  background-color: var(--negro);
+  background-image:
+    linear-gradient(135deg, rgba(13, 13, 13, 0.85) 0%, rgba(123, 45, 139, 0.15) 100%),
+    url('https://images.unsplash.com/photo-1617196034183-421b4040ed20?w=1600&q=80');
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Detalle decorativo lateral derecho */
+#hero::after {
+  content: '';
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 4px;
+  height: 100%;
+  background: linear-gradient(to bottom, transparent, var(--morado), transparent);
+}
+
+.hero-titulo {
+  font-size: clamp(2.2rem, 6vw, 4.5rem);
+  font-weight: 900;
+  color: var(--blanco);
+  line-height: 1.1;
+  text-shadow: 0 2px 20px rgba(0, 0, 0, 0.6);
+}
+
+.hero-titulo span {
+  color: var(--morado);
+}
+
+.hero-subtitulo {
+  font-size: clamp(0.95rem, 2vw, 1.15rem);
+  color: var(--gris-texto);
+  margin-top: 16px;
+  margin-bottom: 28px;
+  line-height: 1.7;
+  max-width: 520px;
+}
+
+/* Botón principal rojo */
+.btn-hero {
+  display: inline-block;
+  background-color: var(--morado);
+  color: var(--blanco);
+  border: none;
+  padding: 13px 32px;
+  font-size: 0.95rem;
+  font-weight: 700;
+  border-radius: 4px;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background-color 0.2s, transform 0.15s, box-shadow 0.2s;
+  box-shadow: 0 4px 18px var(--morado-glow);
+}
+
+.btn-hero:hover {
+  background-color: var(--morado-dark);
+  color: var(--blanco);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px var(--morado-glow);
+}
+
+/* Botón secundario con borde */
+.btn-hero-borde {
+  display: inline-block;
+  background-color: transparent;
+  color: var(--blanco);
+  border: 2px solid rgba(245, 245, 245, 0.4);
+  padding: 11px 30px;
+  font-size: 0.95rem;
+  border-radius: 4px;
+  text-decoration: none;
+  cursor: pointer;
+  transition: border-color 0.2s, color 0.2s;
+}
+
+.btn-hero-borde:hover {
+  border-color: var(--morado);
+  color: var(--morado);
+}
+
+/* ---------- SECCIÓN REUTILIZABLE ---------- */
+.seccion-label {
+  display: block;
+  color: var(--morado);
+  font-size: 0.72rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  font-weight: 700;
+  margin-bottom: 6px;
+}
+
+.seccion-titulo {
+  font-size: clamp(1.8rem, 4vw, 2.8rem);
+  font-weight: 800;
+  color: var(--blanco);
+  line-height: 1.2;
+  margin-top: 4px;
+}
+
+.linea-morada {
+  width: 48px;
+  height: 3px;
+  background: linear-gradient(to right, var(--morado), transparent);
+  margin: 16px 0;
+  border-radius: 2px;
+}
+
+/* ---------- NOSOTROS ---------- */
+#nosotros {
+  background-color: var(--negro-soft);
+  padding: 90px 0;
+}
+
+#nosotros p {
+  color: var(--gris-texto);
+  line-height: 1.85;
+  font-size: 0.95rem;
+}
+
+.foto-nosotros {
+  width: 100%;
+  border-radius: 6px;
+  border: 2px solid var(--morado);
+  box-shadow: 0 8px 40px rgba(123, 45, 139, 0.2);
+}
+
+/* Número estadística */
+.stat-numero {
+  font-size: 2.8rem;
+  font-weight: 900;
+  color: var(--morado);
+  line-height: 1;
+}
+
+.stat-label {
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  color: var(--gris-texto);
+  margin-top: 4px;
+}
+
+/* ---------- MENÚ ---------- */
+#menu {
+  background-color: var(--negro);
+  padding: 90px 0;
+}
+
+/* Card de producto */
+.card-menu {
+  background-color: var(--gris-card);
+  border: 1px solid #252525;
+  border-radius: 8px;
+  overflow: hidden;
+  height: 100%;
+  transition: transform 0.25s, box-shadow 0.25s, border-color 0.25s;
+}
+
+.card-menu:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 12px 35px rgba(123, 45, 139, 0.2);
+  border-color: var(--morado);
+}
+
+.card-menu img {
+  width: 100%;
+  height: 185px;
+  object-fit: cover;
+  transition: transform 0.35s;
+}
+
+.card-menu:hover img {
+  transform: scale(1.04);
+}
+
+.card-menu-body {
+  padding: 16px;
+}
+
+.card-categoria {
+  font-size: 0.68rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--morado);
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+
+.card-nombre {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--blanco);
+  margin-bottom: 6px;
+}
+
+.card-descripcion {
+  font-size: 0.8rem;
+  color: var(--gris-texto);
+  line-height: 1.55;
+  margin-bottom: 12px;
+}
+
+.card-footer-menu {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.card-precio {
+  font-size: 1.1rem;
+  font-weight: 800;
+  color: var(--blanco);
+}
+
+/* Botón pedir en la card */
+.btn-pedir {
+  background-color: var(--morado);
+  color: var(--blanco);
+  border: none;
+  padding: 6px 16px;
+  border-radius: 4px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s, transform 0.15s;
+}
+
+.btn-pedir:hover {
+  background-color: var(--morado-dark);
+  transform: translateY(-1px);
+}
+
+/* Botón ver carta completa */
+.btn-ver-carta {
+  display: inline-block;
+  background-color: transparent;
+  color: var(--blanco);
+  border: 2px solid var(--morado);
+  padding: 11px 30px;
+  border-radius: 4px;
+  font-size: 0.95rem;
+  font-weight: 700;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background-color 0.2s, color 0.2s, transform 0.15s;
+}
+
+.btn-ver-carta:hover {
+  background-color: var(--morado);
+  color: var(--blanco);
+  transform: translateY(-2px);
+}
+
+/* ---------- RESERVAS ---------- */
+#reservas {
+  background-color: var(--negro-soft);
+  padding: 90px 0;
+}
+
+/* Input personalizado oscuro */
+.input-illadi {
+  background-color: #222;
+  border: 1px solid #333;
+  color: var(--blanco);
+  border-radius: 4px;
+  padding: 10px 14px;
+  width: 100%;
+  font-family: inherit;
+  font-size: 0.9rem;
+  transition: border-color 0.2s;
+}
+
+.input-illadi:focus {
+  outline: none;
+  border-color: var(--morado);
+  background-color: #272727;
+}
+
+.input-illadi::placeholder {
+  color: #555;
+}
+
+.input-illadi option {
+  background-color: #222;
+  color: var(--blanco);
+}
+
+/* Label del formulario */
+.label-illadi {
+  display: block;
+  color: var(--gris-texto);
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-bottom: 6px;
+}
+
+/* Caja del formulario */
+.caja-formulario {
+  background-color: #141414;
+  border: 1px solid #2a2a2a;
+  border-top: 3px solid var(--morado);
+  border-radius: 8px;
+  padding: 35px;
+}
+
+/* Botón enviar reserva */
+.btn-reservar {
+  background-color: var(--morado);
+  color: var(--blanco);
+  border: none;
+  padding: 13px;
+  font-size: 0.95rem;
+  font-weight: 700;
+  border-radius: 4px;
+  width: 100%;
+  cursor: pointer;
+  transition: background-color 0.2s, transform 0.15s;
+  letter-spacing: 0.05em;
+}
+
+.btn-reservar:hover {
+  background-color: var(--morado-dark);
+  transform: translateY(-1px);
+}
+
+/* Tarjeta de información lateral */
+.info-reserva {
+  background-color: #141414;
+  border-left: 3px solid var(--morado);
+  border-radius: 4px;
+  padding: 18px 20px;
+  margin-bottom: 14px;
+}
+
+.info-reserva i {
+  color: var(--morado);
+  font-size: 1.3rem;
+  display: block;
+  margin-bottom: 7px;
+}
+
+.info-reserva h6 {
+  color: var(--blanco);
+  font-size: 0.7rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  margin-bottom: 4px;
+}
+
+.info-reserva p {
+  color: var(--gris-texto);
+  font-size: 0.85rem;
+  margin: 0;
+  line-height: 1.6;
+}
+
+/* ---------- FOOTER ---------- */
+footer {
+  background-color: #080808;
+  padding: 55px 0 25px;
+  border-top: 2px solid var(--morado);
+}
+
+.footer-marca {
+  font-size: 1.9rem;
+  font-weight: 900;
+  color: var(--blanco);
+  text-decoration: none;
+  display: inline-block;
+}
+
+.footer-marca span {
+  color: var(--morado);
+}
+
+.footer-tagline {
+  color: var(--gris-texto);
+  font-size: 0.8rem;
+  margin-top: 6px;
+}
+
+.footer-titulo {
+  color: var(--morado);
+  font-size: 0.7rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  font-weight: 700;
+  margin-bottom: 16px;
+}
+
+.footer-link {
+  color: var(--gris-texto);
+  text-decoration: none;
+  font-size: 0.88rem;
+  display: block;
+  margin-bottom: 9px;
+  transition: color 0.2s, padding-left 0.2s;
+}
+
+.footer-link:hover {
+  color: var(--morado);
+  padding-left: 4px;
+}
+
+/* Botón red social redondo */
+.btn-social {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 1px solid #333;
+  color: var(--gris-texto);
+  text-decoration: none;
+  font-size: 1.05rem;
+  margin-right: 8px;
+  transition: border-color 0.2s, color 0.2s, background-color 0.2s;
+  cursor: pointer;
+  background: transparent;
+}
+
+.btn-social:hover {
+  border-color: var(--morado);
+  color: var(--morado);
+  background-color: rgba(123, 45, 139, 0.08);
+}
+
+/* Línea inferior del footer */
+.footer-bottom {
+  border-top: 1px solid #1e1e1e;
+  margin-top: 35px;
+  padding-top: 20px;
+  color: #444;
+  font-size: 0.78rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+/* ---------- RESPONSIVE ---------- */
+@media (max-width: 576px) {
+  .caja-formulario {
+    padding: 22px;
+  }
+
+  .footer-bottom {
+    justify-content: center;
+    text-align: center;
+  }
 }
